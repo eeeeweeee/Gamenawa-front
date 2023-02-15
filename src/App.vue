@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    Welcome to Gamenawa!!
+    <router-view></router-view>
   </div>
 </template>
 
