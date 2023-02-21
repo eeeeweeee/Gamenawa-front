@@ -1,12 +1,12 @@
 <template>
   <div>
+    <TheHeader/>
     Welcome to Gamenawa!!
-    <BaseSearch/>
   </div>
 </template>
 
 <script setup lang="ts">
-import BaseSearch from '../components/base/BaseSearch.vue';
+import TheHeader from '../components/common/TheHeader.vue';
 </script>
 
 <style></style>
