@@ -4,12 +4,13 @@
       Gamenawa
     </div>
     <div class="header__search">
-      <BaseSearch/>
+      <BaseSearch @search="searchHandler"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import { defineEmits } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseSearch from '../base/BaseSearch.vue';
 
@@ -17,6 +18,14 @@ const router = useRouter();
 
 function routeHome() {
   router.push('/');
+}
+
+const emit = defineEmits([
+  'search',
+]);
+
+function searchHandler(title: string) {
+  emit('search', title);
 }
 </script>
 
