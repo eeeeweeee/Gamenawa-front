@@ -92,6 +92,7 @@ function searchHandler() {
     }
     span {
       margin: 2px;
+      cursor: pointer;
     }
   }
 }
