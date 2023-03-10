@@ -4,15 +4,23 @@
       Gamenawa
     </div>
     <div class="header__search">
-      <BaseSearch @search="searchHandler"/>
+      <BaseSearch :title="props.title"/>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { defineEmits } from 'vue';
+import { defineProps } from 'vue';
 import { useRouter } from 'vue-router';
 import BaseSearch from '../base/BaseSearch.vue';
+
+const props = defineProps({
+  title: {
+    Type: String,
+    required: false,
+    default: '',
+  },
+});
 
 const router = useRouter();
 
@@ -20,13 +28,6 @@ function routeHome() {
   router.push('/');
 }
 
-const emit = defineEmits([
-  'search',
-]);
-
-function searchHandler(title: string) {
-  emit('search', title);
-}
 </script>
 
 <style lang="scss" scoped>
@@ -47,6 +48,7 @@ function searchHandler(title: string) {
 
   &__search {
     margin-top: 10px;
+    flex: 1;
   }
 }
 </style>

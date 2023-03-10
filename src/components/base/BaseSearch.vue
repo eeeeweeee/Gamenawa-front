@@ -19,7 +19,7 @@
 <script setup lang="ts">
 
 import {
-  withDefaults, defineProps, defineEmits, ref, Ref,
+  watch, withDefaults, defineProps, ref, Ref,
 } from 'vue';
 import { useRouter } from 'vue-router';
 import SearchIcon from '../icons/SearchIcon.vue';
@@ -28,6 +28,7 @@ interface Props {
   placeholder: string
   width: string
   height: string
+  title?: string
 }
 
 interface IData {
@@ -36,10 +37,11 @@ interface IData {
   }
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   placeholder: 'placeholder',
-  width: '300px',
+  width: '800px',
   height: '300px',
+  title: '',
 });
 
 const router = useRouter();
@@ -54,22 +56,24 @@ function blurHandler() {
   isFocus.value = false;
 }
 
-const emit = defineEmits([
-  'search',
-]);
+watch(() => props.title, (title) => {
+  if (title !== '') {
+    input.value.value = title;
+    focusHandler();
+  }
+});
 
 function searchHandler() {
   const { value } : IData = input;
   if (value.value !== '') {
-    emit('search', value.value);
-    router.push('/search');
+    router.push({ name: 'search', query: { title: value.value } });
+    input.value.value = value.value;
   }
 }
 
 </script>
 
 <style lang="scss" scoped>
-
 .search {
   &__input-container {
     display: flex;
