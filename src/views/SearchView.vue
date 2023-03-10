@@ -38,14 +38,15 @@ const searchKeyword: Ref<string> = ref('' as string);
 const totalCount: Ref<number> = ref(0);
 const totalPage: Ref<number> = ref(0);
 const curPage: Ref<number> = ref(0);
+const pageSize: number = 5;
 const route = useRoute();
 
 async function searchHandler(title: string, page?: number) {
   searchKeyword.value = title;
-  const res = await getGameInfoList(title, page);
+  const res = await getGameInfoList(title, page, pageSize);
   gameDataList.push(...res.data.gameListItemResponses);
   totalCount.value = res.data.totalCount;
-  totalPage.value = totalCount.value / 5;
+  totalPage.value = totalCount.value / pageSize;
   curPage.value += 1;
 }
 
