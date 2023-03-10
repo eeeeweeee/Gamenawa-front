@@ -50,8 +50,6 @@ async function searchHandler(title: string, page?: number) {
 }
 
 async function infiniteLoading() {
-  console.log(totalPage.value);
-  console.log(curPage.value);
   if (curPage.value <= totalPage.value) {
     searchHandler(searchKeyword.value, curPage.value);
   }
